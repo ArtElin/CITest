@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-testapp-deployment
+  labels:
+    app: nginx-testapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-testapp
+  template:
+    metadata:
+      labels:
+        app: nginx-testapp
+    spec:
+      containers:
+      - name: nginx-testapp
+        image: cr.yandex/crpie1ahtaa9v6fs6sq3/nginx-testapp:staging
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
